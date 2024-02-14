@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import constants from "../../constants";
 
 export default class Asteroid extends Phaser.Physics.Arcade.Sprite {
-    private H_VELOCITY: number = 0;
+    private H_VELOCITY: number = 20;
     private MAX_V_VELOCITY: number = 600;
     private MIN_V_VELOCITY: number = 50;
     static ROTATION_RATE: number = 0.03;

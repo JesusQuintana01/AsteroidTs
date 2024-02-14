@@ -2,7 +2,6 @@ import Phaser from "phaser";
 
 // @ts-ignore 
 import Asteroid from './Asteroid';
-import constants from '../../constants';
 
 jest.mock('phaser');
 

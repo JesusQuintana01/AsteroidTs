@@ -8,7 +8,7 @@ import EnvironmentLoader from '../components/Environment';
 import Ship from "../components/Ship";
 
 export default class MainScene extends Phaser.Scene {
-    private asteroidGroup?: AsteroidsRain; // Declares a property to hold a group of asteroids
+    private asteroidRain?: AsteroidsRain; // Declares a property to hold a group of asteroids
     private scoreManager?: ScoreManager; // Declares a property to manage the score
     private environmentLoader: EnvironmentLoader; // Declares a property to load environment assets
     private ship?: Ship; // Declares a property to hold the player's ship
@@ -28,6 +28,12 @@ export default class MainScene extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.setBounds(
+            0,
+            0,
+            constants.SCREEN_WITH,
+            constants.SCREEN_HEIGHT
+        );
         this.environmentLoader.create();
         // Pauses the game until the player clicks to continue
         if (!this.isGameStarted) {
@@ -44,71 +50,43 @@ export default class MainScene extends Phaser.Scene {
                 this.scene.resume();
             });
         }
-
+        //create Score Manager
         this.scoreManager = new ScoreManager(this);
-        this.asteroidGroup = new AsteroidsRain(this);
-        this.physics.add.collider(
-            this.asteroidGroup.getAsteroidGroup(),
-            this.asteroidGroup.getAsteroidGroup(),
-            //@ts-ignore
-            this.asteroidCollisionHandler, // Handles collisions between asteroids
-            undefined,
-            this
-        );
 
-        this.physics.add.overlap(this.environmentLoader.getZone(), this.asteroidGroup.getAsteroidGroup(), (_zone, asteroid) => {
+        //create Asteroid rain
+        this.asteroidRain = new AsteroidsRain(this);
+        this.asteroidRain?.collide(this.asteroidRain?.getAsteroidGroup(), this.asteroidCollisionHandler)
+        this.physics.add.overlap(this.environmentLoader.getZone(), this.asteroidRain.getAsteroidGroup(), (_zone, asteroid) => {
             asteroid.destroy();
             this.scoreManager?.increaseScore(1);
         });
 
-        this.cameras.main.setBounds(
-            0,
-            0,
-            constants.SCREEN_WITH,
-            constants.SCREEN_HEIGHT
-        );
         //create Ship
-        this.anims.create({
-            key: 'turn',
-            frames: this.anims.generateFrameNumbers(assets.SHIP.KEY, { frames: [3, 8] }), // Creates an animation for the ship
-            frameRate: 20,
-            repeat: -1
-        });
         this.ship = new Ship(this, constants.SCREEN_WITH / 2, constants.SCREEN_HEIGHT / 2, assets.SHIP.KEY);
-
-        this.ship?.setCollideWorldBounds(true);
-
-        this.physics.add.collider(
-            this.ship,
-            this.asteroidGroup.getAsteroidGroup(),
-            //@ts-ignore
-            () => {
-                this.scene.pause();
-                this.environmentLoader.getSoundtrack()?.stop();
-                this.moveToGameOver();
-            },
-            undefined,
-            this
-        );
+        this.ship?.collide(this.asteroidRain?.getAsteroidGroup(), () => {
+            this.scene.pause();
+            this.environmentLoader.getSoundtrack()?.stop();
+            this.moveToGameOver();
+        })
     }
 
     update() {
         //@ts-ignore
-        this.asteroidGroup?.getAsteroidGroup().children.iterate((asteroid: Phaser.Types.GameObjects) => {
+        this.asteroidRain?.getAsteroidGroup().children.iterate((asteroid: Phaser.Types.GameObjects) => {
             if (!this.isGameStarted) {
                 (asteroid as Phaser.Physics.Arcade.Sprite).destroy(); // Destroys asteroids if the game hasn't started yet
             }
             (asteroid as Phaser.Physics.Arcade.Sprite).rotation += Asteroid.ROTATION_RATE;
         });
         this.ship?.update();
-        this.asteroidGroup?.update();
+        this.asteroidRain?.update();
     }
 
     restartScene() {
         this.scene.restart();
     }
 
-    private asteroidCollisionHandler(asteroid1: Phaser.Types.Physics.Arcade.ArcadeColliderType, asteroid2: Phaser.Types.Physics.Arcade.ArcadeColliderType) {
+    asteroidCollisionHandler = (asteroid1: Phaser.Types.Physics.Arcade.ArcadeColliderType, asteroid2: Phaser.Types.Physics.Arcade.ArcadeColliderType) => {
         if (asteroid1 instanceof Phaser.Physics.Arcade.Sprite && asteroid2 instanceof Phaser.Physics.Arcade.Sprite) {
             asteroid1.setBounce(0, constants.ASTEROID_COLLITION_VALUE.OBJ1);
             asteroid2.setBounce(0, constants.ASTEROID_COLLITION_VALUE.OBJ2);

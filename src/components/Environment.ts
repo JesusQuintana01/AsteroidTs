@@ -25,7 +25,7 @@ export default class EnvironmentLoader {
             frameRate: 15,
             repeat: -1
         });
-        this.scene.add.sprite(constants.SCREEN_WITH / 2, constants.SCREEN_HEIGHT / 2, assets.BACKGROUND.KEY).play(assets.BACKGROUND.KEY);
+        this.scene.add.sprite(constants.SCREEN_WITH / 2, constants.SCREEN_HEIGHT / 2, assets.BACKGROUND.KEY).play(assets.BACKGROUND.KEY).setScale(1.6);
 
         // Create zone
         this.zone = this.scene.add.zone(0, constants.SCREEN_HEIGHT - 10, constants.SCREEN_WITH * 2, 0);
@@ -34,8 +34,8 @@ export default class EnvironmentLoader {
         // Play soundtrack
         this.soundtrack = this.scene.sound.add(assets.MUSIC.KEY, { loop: true });
         this.soundtrack.play();
+
         //labels
-        this.scene.add.nineslice(250, 50, 'ui', 'RedButtonSml', 450, 88, 64, 64, 48, 48).setDepth(1)
         this.scene.add.nineslice(400, 760, 'ui', 'blue_button00', 180, 44, 33, 33, 24, 24).setDepth(1)
         const st = this.scene.add.text(350, 750, "Unmuted").setFontSize(24).setDepth(2);
         st.setInteractive();

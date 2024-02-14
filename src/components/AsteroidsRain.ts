@@ -44,4 +44,14 @@ export default class AsteroidsRain {
             this.areMeteoritesAccelerated = false
         }
     }
+    collide(objectCollider: Phaser.Types.Physics.Arcade.ArcadeColliderType, callback: (asteroid1: Phaser.Types.Physics.Arcade.ArcadeColliderType, asteroid2: Phaser.Types.Physics.Arcade.ArcadeColliderType) => void) {
+        this.scene.physics.add.collider(
+            this.asteroidGroup,
+            objectCollider,
+            //@ts-ignore
+            callback,
+            undefined,
+            this
+        );
+    }
 }

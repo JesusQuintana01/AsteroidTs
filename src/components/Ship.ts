@@ -1,16 +1,22 @@
 import Phaser from 'phaser';
-import constants from '../../constants';
+import assets from '../../assets';
+
 
 export default class Ship extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
     private speed: number;
-    private smallMode: boolean;
-    private turboMode: boolean;
+    smallMode: boolean;
+
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string, speed?: number) {
         super(scene, x, y, texture);
         this.smallMode = false
-        this.turboMode = false
         this.scene = scene;
+        this.scene.anims.create({
+            key: 'turn',
+            frames: this.anims.generateFrameNumbers(assets.SHIP.KEY, { frames: [3, 8] }), // Creates an animation for the ship
+            frameRate: 20,
+            repeat: -1
+        });
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         this.speed = speed ?? 350
@@ -19,9 +25,11 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
         this.setScale(2);
         this.setSize(22, 22)
         this.play('turn')
+        this.setCollideWorldBounds(true);
     }
 
     update() {
+
         if (this.cursors.left?.isDown) {
             this.setVelocityX(-this.speed);
         } else if (this.cursors.right?.isDown) {
@@ -38,7 +46,7 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
         }
         if (this.cursors.space?.isDown) {
             if (this.smallMode) {
-                this.setScale(1.2);
+                this.setScale(1.5);
                 this.setSize(11, 11)
                 this.speed = 100
             }
@@ -48,6 +56,15 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
             this.setSize(22, 22)
             this.speed = 350
         }
+    }
+    collide(objectCollider: Phaser.Types.Physics.Arcade.ArcadeColliderType, callback: () => void) {
+        this.scene.physics.add.collider(
+            this,
+            objectCollider,
+            callback,
+            undefined,
+            this
+        );
     }
 }
 

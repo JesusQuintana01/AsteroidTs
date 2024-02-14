@@ -11,14 +11,35 @@ Phaser.Physics = {
       this.x = x;
       this.y = y;
       this.sprite = sprite;
+      this.scale = 0;
       this.setInteractive = jest.fn().mockReturnThis();
       this.setVelocity = jest.fn().mockReturnThis();
+      this.setVelocityX = jest.fn().mockReturnThis();
+      this.setVelocityY = jest.fn().mockReturnThis();
       this.setScale = jest.fn().mockReturnThis();
       this.setSize = jest.fn().mockReturnThis();
+      this.play = jest.fn().mockReturnThis();
+      this.setCollideWorldBounds = jest.fn().mockReturnThis();
+      this.anims = {
+        generateFrameNumbers: jest.fn(() => ({ frames: {} })),
+      };
     }),
     Group: jest.fn().mockImplementation(function () {
       this.add = jest.fn();
     }),
+  },
+};
+Phaser.Types = {
+  Input: {
+    Keyboard: {
+      CursorKeys: {
+        left: { isDown: Boolean },
+        right: { isDown: Boolean },
+        up: { isDown: Boolean },
+        down: { isDown: Boolean },
+        space: { isDown: Boolean },
+      },
+    },
   },
 };
 
@@ -35,12 +56,16 @@ Phaser.Scene = jest.fn().mockImplementation(function () {
     add: {
       group: jest.fn().mockReturnValue([]),
       existing: jest.fn(),
+      collider: jest.fn(),
     },
   };
   this.input = {
     keyboard: {
       createCursorKeys: jest.fn(),
     },
+  };
+  this.anims = {
+    create: jest.fn(),
   };
 });
 
