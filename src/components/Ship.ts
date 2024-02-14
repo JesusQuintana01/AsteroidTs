@@ -60,13 +60,13 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
         if (this.cursors.space?.isDown) {
             if (this.smallMode) {
                 this.setScale(1.4);
-                this.setSize(15, 25)
+                this.setSize(12, 20)
                 this.speed = 100
             }
             this.smallMode = !this.smallMode;
         } else {
             this.setScale(2);
-            this.setSize(35, 50)
+            this.setSize(25, 35)
             this.speed = 350
         }
     }
