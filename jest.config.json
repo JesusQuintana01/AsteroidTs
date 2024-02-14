@@ -1,0 +1,14 @@
+{
+  "bail": 1,
+  "verbose": true,
+  "preset": "ts-jest",
+  "testEnvironment": "jsdom",
+  "globals": {
+    "ts-jest": {
+      "diagnostics": false
+    }
+  },
+  "moduleNameMapper": {
+    "^phaser$": "<rootDir>/__mocks__/phaser.js"
+  }
+}
