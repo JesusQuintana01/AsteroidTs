@@ -17,7 +17,7 @@
 - To mute the music, click on the "unmuted" label.
 - The game is simple and consists of three actions:
   1. Move using the arrow keys on your keyboard.
-  2. Make the character shrink by pressing the space bar. Note that this will also make you slower.
+  2. Shrink the character by holding down the space bar. Note that this will also slow you down..
   3. Use the Shift key to speed up the asteroids, but be careful with the collisions.
 
  Running Tests:
