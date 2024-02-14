@@ -31,6 +31,10 @@ export default class GameOverScene extends Phaser.Scene {
             repeat: -1
         });
         ship.play("logo")
+        ship.setInteractive()
+        ship.on('pointerdown', () => {
+            this.scene.start(constants.SCENES_KEYS.MAIN_SCENE);
+        });
 
     }
 }
