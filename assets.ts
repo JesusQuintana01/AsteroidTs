@@ -13,7 +13,7 @@ export default {
     },
     SHIP: {
         KEY: "ship",
-        URL: "assets/ship3.png"
+        URL: "assets/ship9.png"
     },
     NEW_GAME_BUTTON: {
         KEY: "NewGameBTN",

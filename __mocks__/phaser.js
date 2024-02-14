@@ -45,9 +45,30 @@ Phaser.Types = {
 
 Phaser.Scene = jest.fn().mockImplementation(function () {
   this.add = {
+    sprite: jest.fn(),
     existing: jest.fn(),
+    nineslice: jest.fn(),
+    setDepth: jest.fn(),
+    text: jest.fn().mockImplementation((x, y, text, style) => ({
+      x,
+      y,
+      text,
+      style,
+      setInteractive: jest.fn(),
+      on: jest.fn(),
+      setOrigin: jest.fn().mockReturnThis(),
+      setDepth: jest.fn().mockReturnThis(),
+      setText: jest.fn().mockImplementation(function (newText) {
+        this.text = newText;
+        return this;
+      }),
+    })),
   };
-
+  this.scene = {
+    add: {
+      sprite: jest.fn(),
+    },
+  };
   this.time = {
     addEvent: jest.fn(),
   };
@@ -66,6 +87,12 @@ Phaser.Scene = jest.fn().mockImplementation(function () {
   };
   this.anims = {
     create: jest.fn(),
+    generateFrameNumbers: jest.fn(() => ({ frames: {} })),
+  };
+  this.cameras = {
+    main: {
+      setBounds: jest.fn(),
+    },
   };
 });
 

@@ -13,7 +13,7 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
         this.scene = scene;
         this.scene.anims.create({
             key: 'turn',
-            frames: this.anims.generateFrameNumbers(assets.SHIP.KEY, { frames: [3, 8] }), // Creates an animation for the ship
+            frames: this.anims.generateFrameNumbers(assets.SHIP.KEY, { frames: [0, 1] }), // Creates an animation for the ship
             frameRate: 20,
             repeat: -1
         });
@@ -22,8 +22,6 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
         this.speed = speed ?? 350
         //@ts-ignore
         this.cursors = this.scene.input.keyboard.createCursorKeys();
-        this.setScale(2);
-        this.setSize(22, 22)
         this.play('turn')
         this.setCollideWorldBounds(true);
     }
@@ -46,14 +44,14 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
         }
         if (this.cursors.space?.isDown) {
             if (this.smallMode) {
-                this.setScale(1.5);
-                this.setSize(11, 11)
+                this.setScale(0.6);
+                this.setSize(46, 46)
                 this.speed = 100
             }
             this.smallMode = !this.smallMode;
         } else {
-            this.setScale(2);
-            this.setSize(22, 22)
+            this.setScale(1.1);
+            this.setSize(62, 62)
             this.speed = 350
         }
     }

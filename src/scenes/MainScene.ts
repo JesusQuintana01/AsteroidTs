@@ -8,11 +8,11 @@ import EnvironmentLoader from '../components/Environment';
 import Ship from "../components/Ship";
 
 export default class MainScene extends Phaser.Scene {
-    private asteroidRain?: AsteroidsRain; // Declares a property to hold a group of asteroids
-    private scoreManager?: ScoreManager; // Declares a property to manage the score
-    private environmentLoader: EnvironmentLoader; // Declares a property to load environment assets
-    private ship?: Ship; // Declares a property to hold the player's ship
-    private isGameStarted: boolean; // Declares a boolean to track if the game has started or not
+    asteroidRain?: AsteroidsRain; // Declares a property to hold a group of asteroids
+    scoreManager?: ScoreManager; // Declares a property to manage the score
+    environmentLoader: EnvironmentLoader; // Declares a property to load environment assets
+    ship?: Ship; // Declares a property to hold the player's ship
+    isGameStarted: boolean; // Declares a boolean to track if the game has started or not
 
     constructor() {
         super({ key: constants.SCENES_KEYS.MAIN_SCENE });
@@ -23,7 +23,7 @@ export default class MainScene extends Phaser.Scene {
     preload() {
         this.environmentLoader.preload();
         this.load.image(assets.ASTEROID.KEY, assets.ASTEROID.URL);
-        this.load.spritesheet(assets.SHIP.KEY, assets.SHIP.URL, { frameWidth: 16, frameHeight: 24 });
+        this.load.spritesheet(assets.SHIP.KEY, assets.SHIP.URL, { frameWidth: 59, frameHeight: 83 });
         this.load.atlas(assets.BTN_UI.KEY, assets.BTN_UI.URL, assets.BTN_UI.JSON);
     }
 
