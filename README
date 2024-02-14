@@ -6,8 +6,8 @@
 
  Installation Steps:
 
-1. Download the project from this repository.
-2. Install the dependencies using the command: `npm i`.
+1. Download the project from this repository and enter in the folder with the console.
+2. Install the dependencies using the command: `npm install`.
 3. Run the project using the command: `npm run dev`.
 4. Then, access the URL where the service is running. Usually, it's http://localhost:5173/, but make sure to check the console as it may vary.
 
@@ -17,7 +17,7 @@
 - To mute the music, click on the "unmuted" label.
 - The game is simple and consists of three actions:
   1. Move using the arrow keys on your keyboard.
-  2. Make the character shrink by pressing the space bar. Note that this will also make you slower.
+  2. Shrink the character by holding down the space bar. Note that this will also slow you down..
   3. Use the Shift key to speed up the asteroids, but be careful with the collisions.
 
  Running Tests:
