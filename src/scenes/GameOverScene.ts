@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import constants from '../../constants';
+import assets from '../../assets';
 
 interface Data {
     score: number
@@ -7,6 +8,9 @@ interface Data {
 export default class GameOverScene extends Phaser.Scene {
     constructor() {
         super({ key: constants.SCENES_KEYS.GAME_OVER });
+    }
+    preload() {
+        this.load.spritesheet("aaa", assets.SHIP.URL, { frameWidth: 42.6, frameHeight: 46.5 });
     }
 
     create(data: Data) {
@@ -18,5 +22,15 @@ export default class GameOverScene extends Phaser.Scene {
         restartText.on('pointerdown', () => {
             this.scene.start(constants.SCENES_KEYS.MAIN_SCENE);
         });
+
+        const ship = this.add.sprite(250, 550, assets.SHIP.KEY).setScale(4)
+        this.anims.create({
+            key: 'logo',
+            frames: ship.anims.generateFrameNumbers(assets.SHIP.KEY, { frames: [1, 4] }), // Creates an animation for the ship
+            frameRate: 20,
+            repeat: -1
+        });
+        ship.play("logo")
+
     }
 }
