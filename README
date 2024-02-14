@@ -6,8 +6,8 @@
 
  Installation Steps:
 
-1. Download the project from this repository.
-2. Install the dependencies using the command: `npm i`.
+1. Download the project from this repository and enter in the folder with the console.
+2. Install the dependencies using the command: `npm install`.
 3. Run the project using the command: `npm run dev`.
 4. Then, access the URL where the service is running. Usually, it's http://localhost:5173/, but make sure to check the console as it may vary.
 
