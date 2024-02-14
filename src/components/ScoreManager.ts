@@ -6,7 +6,6 @@ export default class ScoreManager {
 
     constructor(scene: Phaser.Scene) {
         this.score = 0;
-        scene.add.nineslice(250, 50, 'ui', 'RedButtonSml', 380, 48, 40, 40, 25, 25).setDepth(1)
         this.scoreText = scene.add.text(250, 50, 'Score:0', { font: '36px Courier' }).setOrigin(0.5, 0.5).setDepth(1);
     }
 

@@ -36,6 +36,7 @@ export default class EnvironmentLoader {
         this.soundtrack.play();
 
         //labels
+        this.scene.add.nineslice(250, 50, 'ui', 'RedButtonSml', 400, 68, 40, 40, 25, 25).setDepth(1)
         this.scene.add.nineslice(400, 760, 'ui', 'blue_button00', 180, 44, 33, 33, 24, 24).setDepth(1)
         const st = this.scene.add.text(350, 750, "Unmuted").setFontSize(24).setDepth(2);
         st.setInteractive();

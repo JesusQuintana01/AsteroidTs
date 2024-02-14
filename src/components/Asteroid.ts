@@ -3,8 +3,8 @@ import constants from "../../constants";
 
 export default class Asteroid extends Phaser.Physics.Arcade.Sprite {
     private H_VELOCITY: number = 20;
-    private MAX_V_VELOCITY: number = 600;
-    private MIN_V_VELOCITY: number = 50;
+    private MAX_V_VELOCITY: number = 500;
+    private MIN_V_VELOCITY: number = 30;
     static ROTATION_RATE: number = 0.03;
 
     constructor(scene: Phaser.Scene, sprite: string, asteroidsGroup: Phaser.Physics.Arcade.Group) {

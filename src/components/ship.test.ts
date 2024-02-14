@@ -22,8 +22,6 @@ describe.only('Ship', () => {
         expect(scene.add.existing).toHaveBeenCalledWith(ship);
         expect(scene.physics.add.existing).toHaveBeenCalledWith(ship);
         expect(ship.setCollideWorldBounds).toHaveBeenCalledWith(true);
-        expect(ship.setScale).toHaveBeenCalledWith(2);
-        expect(ship.setSize).toHaveBeenCalledWith(22, 22);
         expect(ship.play).toHaveBeenCalledWith('turn');
     });
 

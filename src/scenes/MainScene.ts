@@ -23,7 +23,7 @@ export default class MainScene extends Phaser.Scene {
     preload() {
         this.environmentLoader.preload();
         this.load.image(assets.ASTEROID.KEY, assets.ASTEROID.URL);
-        this.load.spritesheet(assets.SHIP.KEY, assets.SHIP.URL, { frameWidth: 59, frameHeight: 83 });
+        this.load.spritesheet(assets.SHIP.KEY, assets.SHIP.URL, { frameWidth: 42.6, frameHeight: 46.5 });
         this.load.atlas(assets.BTN_UI.KEY, assets.BTN_UI.URL, assets.BTN_UI.JSON);
     }
 

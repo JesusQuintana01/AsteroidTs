@@ -13,7 +13,19 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
         this.scene = scene;
         this.scene.anims.create({
             key: 'turn',
-            frames: this.anims.generateFrameNumbers(assets.SHIP.KEY, { frames: [0, 1] }), // Creates an animation for the ship
+            frames: this.anims.generateFrameNumbers(assets.SHIP.KEY, { frames: [1, 4] }), // Creates an animation for the ship
+            frameRate: 20,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: 'left',
+            frames: this.anims.generateFrameNumbers(assets.SHIP.KEY, { frames: [0, 3] }), // Creates an animation for the ship
+            frameRate: 20,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers(assets.SHIP.KEY, { frames: [2, 5] }), // Creates an animation for the ship
             frameRate: 20,
             repeat: -1
         });
@@ -30,10 +42,13 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
 
         if (this.cursors.left?.isDown) {
             this.setVelocityX(-this.speed);
+            this.play('left', true)
         } else if (this.cursors.right?.isDown) {
             this.setVelocityX(this.speed);
+            this.play('right', true)
         } else {
             this.setVelocityX(0);
+            this.play('turn', true)
         }
         if (this.cursors.up?.isDown) {
             this.setVelocityY(-this.speed);
@@ -44,14 +59,14 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
         }
         if (this.cursors.space?.isDown) {
             if (this.smallMode) {
-                this.setScale(0.6);
-                this.setSize(46, 46)
+                this.setScale(1.4);
+                this.setSize(15, 25)
                 this.speed = 100
             }
             this.smallMode = !this.smallMode;
         } else {
-            this.setScale(1.1);
-            this.setSize(62, 62)
+            this.setScale(2);
+            this.setSize(35, 50)
             this.speed = 350
         }
     }

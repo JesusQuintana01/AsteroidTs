@@ -78,6 +78,7 @@ Phaser.Scene = jest.fn().mockImplementation(function () {
       group: jest.fn().mockReturnValue([]),
       existing: jest.fn(),
       collider: jest.fn(),
+      overlap: jest.fn(),
     },
   };
   this.input = {

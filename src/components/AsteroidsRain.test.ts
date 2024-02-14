@@ -37,7 +37,7 @@ describe('AsteroidsRain', () => {
         } as unknown as Phaser.Time.Clock;
     });
 
-    it.only('should create asteroids at a set interval', () => {
+    it('should create asteroids at a set interval', () => {
         console.log(constants);
 
         const asteroidsRain = new AsteroidsRain(scene);
