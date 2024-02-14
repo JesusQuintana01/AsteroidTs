@@ -1,5 +1,5 @@
 import MainScene from './MainScene';
-import EnvironmentLoader from '../components/Environment'; // 
+import EnvironmentLoader from '../components/Environment';
 import ScoreManager from '../components/ScoreManager';
 
 // Mock de Phaser.Scene para simular la escena
@@ -42,7 +42,6 @@ describe('MainScene', () => {
     it('create should initialize components correctly', () => {
 
         scene.create();
-        // Verificar si los componentes se han inicializado correctamente
         expect(scene.asteroidRain).toBeDefined();
         expect(scene.scoreManager).toBeDefined();
         expect(scene.ship).toBeDefined();

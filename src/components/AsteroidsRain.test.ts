@@ -1,10 +1,10 @@
 import Phaser from 'phaser';
 import AsteroidsRain from './AsteroidsRain';
-import { mockAsteroidConstructor } from './Asteroid'; // Ajusta la ruta de importación según sea necesario
+import { mockAsteroidConstructor } from './Asteroid';
 import constants from '../../constants';
 
 jest.mock('../../constants', () => {
-    return { default: { ASTEROID_SPAWN_RATE: 1000 } } // Ejemplo de valor
+    return { default: { ASTEROID_SPAWN_RATE: 1000 } }
 });
 
 jest.mock('../../assets', () => {
@@ -43,7 +43,6 @@ describe('AsteroidsRain', () => {
         const asteroidsRain = new AsteroidsRain(scene);
         expect(scene.time.addEvent).toHaveBeenCalledTimes(1);
 
-        // Simula la llamada al callback para verificar si se crea un Asteroid
         const addEventCall = (scene.time.addEvent as jest.Mock).mock.calls[0][0].callback;
         addEventCall();
 
